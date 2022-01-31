@@ -1,29 +1,18 @@
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 
-// mutation for logged in user
 export const LOGIN_USER = gql`
-  mutation loginUser($email: String!, $password: String!) {
+  mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
       user {
         _id
         username
         email
-        bookCount
-        savedBooks {
-          bookId
-          title
-          description
-          authors
-          link
-          image
-        }
       }
     }
   }
 `;
 
-// mutation to add user
 export const ADD_USER = gql`
   mutation addUser($username: String!, $email: String!, $password: String!) {
     addUser(username: $username, email: $email, password: $password) {
@@ -32,53 +21,41 @@ export const ADD_USER = gql`
         _id
         username
         email
-        bookCount
-        savedBooks {
-          bookId
-          title
-          description
-          authors
-          image
-          link
-        }
       }
     }
   }
 `;
 
-// mutation to save books
 export const SAVE_BOOK = gql`
-  mutation saveBook($input: bookInput!) {
-    saveBook(input: $input) {
-      _id
-      username
-      email
-      savedBooks {
-        bookId
-        authors
-        image
-        description
-        title
-        link
-      }
-    }
-  }
-`;
-
-// mutation to remove books
-export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: String!) {
-    removeBook(bookId: $bookId) {
+  mutation saveBook($bookData: BookInput!) {
+    saveBook(bookData: $bookData) {
       _id
       username
       email
       bookCount
       savedBooks {
         bookId
-        authors
-        image
-        description
         title
+        authors
+        description
+        image
+        link
+      }
+    }
+  }
+`;
+
+export const REMOVE_BOOK = gql`
+  mutation removeBook($bookId: ID!) {
+    removeBook(bookId: $bookId) {
+      _id
+      username
+      savedBooks {
+        bookId
+        title
+        authors
+        description
+        image
         link
       }
     }
