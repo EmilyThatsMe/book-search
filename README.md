@@ -14,7 +14,7 @@ Book Search is an app you can use to search for books via keyword and add them t
 
 ## Website
 
-Book Search is deployed on Heroku: https://emilythatsme.github.io/tech-news/
+Book Search is deployed on Heroku: https://damp-plains-75724.herokuapp.com/
 
 ## Usage
 
